@@ -4,6 +4,7 @@ INSTALL_DIR = @gnucap_libdir@
 SPICE_INCLUDE = @SPICE_INCLUDE@
 GNUCAP_INCLUDE = @GNUCAP_INCLUDE@
 VPATH = .:$(SPICE_INCLUDE):$(GNUCAP_INCLUDE)
+GNUCAP=gnucap
 
 C_SRCS = $(CFILES) devsup.c
 CC_SRCS = spice-wrapper.cc
@@ -37,7 +38,7 @@ $(TARGET)$(SO_EXTENSION) : $(OBJS) Makefile
 	$(CCC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(TARGET)$(SO_EXTENSION)
 
 clean: $(HDRS)
-	-rm *.o $(TARGET)$(SO_EXTENSION) $(TARGET)
+	-rm *.o $(TARGET)$(SO_EXTENSION) $(TARGET) $(CHECK:%=%.gc.out) $(CHECK:%=%.ref)
 
 spice-wrapper.o: spice-wrapper.cc wrapper.h
 
@@ -46,3 +47,17 @@ $(OBJS) : $(HDRS)
 install: $(TARGET)$(SO_EXTENSION)
 	mkdir --parents $(INSTALL_DIR)
 	cp $(TARGET)$(SO_EXTENSION) $(INSTALL_DIR)
+
+#regression testing
+check: $(TESTS:%=%.reg)
+
+%.reg: %.gc.out %.ref
+	diff $+
+
+%.ref: %.ckt.out
+	grep -v '^@' $< | grep -v '^#' > $@
+
+%.gc.out: %.gc $(TARGET)$(SO_EXTENSION)
+	$(GNUCAP) $< 2>&1 | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
+
+.PHONY: %.reg
