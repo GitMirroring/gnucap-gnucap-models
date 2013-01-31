@@ -1,4 +1,0 @@
-load ./bjt.so
-spice
-.include d_bjt.ckt
-.end
