@@ -29,7 +29,7 @@ SO_EXTENSION = .so
 MAKEFLAGS += -r
 .SUFFIXES:
 .SUFFIXES: .o .cc .c
-.cc.o:; $(CCC) $(CCFLAGS) $(CPPFLAGS) -c $<
+.cc.o:; $(CCC) $(CCFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c $<
 .c.o:; $(CC) $(CFLAGS) -c $<
 
 $(TARGET) : $(TARGET)$(SO_EXTENSION)
@@ -45,7 +45,9 @@ spice-wrapper.o: spice-wrapper.cc wrapper.h
 
 $(OBJS) : $(HDRS)
 
-install: $(TARGET)$(SO_EXTENSION)
+all: $(TARGET)$(SO_EXTENSION)
+
+install: all
 	mkdir --parents $(INSTALL_DIR)
 	cp $(TARGET)$(SO_EXTENSION) $(INSTALL_DIR)
 
@@ -66,4 +68,4 @@ ATTACH=-a ./$(TARGET)$(SO_EXTENSION)
 %.gc.out: %.ckt $(TARGET)$(SO_EXTENSION)
 	$(GNUCAP) $(ATTACH) -b $< 2>&1 | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
 
-.PHONY: %.reg
+.PHONY: %.reg install
