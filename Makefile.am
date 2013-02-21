@@ -26,3 +26,15 @@ vcvs  \
 vsrc
 
 SUBDIRS=bjt
+
+DISTHACKFILES=configure install-sh config.sub config.guess Makefile.in aclocal.m4 config.h.in
+dist-hack: @PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz
+@PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz:
+	git archive --format=tar --prefix=@PACKAGE_NAME@-@PACKAGE_VERSION@/ HEAD |\
+	    tar -xf -
+	find $(ALL_SUBDIRS) -name Makefile -exec dirname {} \; | xargs -i mkdir -p @PACKAGE_NAME@-@PACKAGE_VERSION@/{}
+	find $(ALL_SUBDIRS) -name Makefile | xargs -i cp {} @PACKAGE_NAME@-@PACKAGE_VERSION@/{}
+	cp $(DISTHACKFILES) @PACKAGE_NAME@-@PACKAGE_VERSION@
+	tar -czf @PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz @PACKAGE_NAME@-@PACKAGE_VERSION@
+
+.PHONY: dist-hack
