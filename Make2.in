@@ -58,7 +58,7 @@ check: $(TESTS:%=%.reg)
 	diff -c $+
 
 %.ref: %.ckt.out
-	grep -v '^@' $< | grep -v '^#' > $@
+	grep -v '^@' $< $(TESTFILTER) | grep -v '^#' > $@
 
 ATTACH=-a ./$(TARGET)$(SO_EXTENSION)
 
@@ -66,6 +66,6 @@ ATTACH=-a ./$(TARGET)$(SO_EXTENSION)
 	$(GNUCAP) $(ATTACH) $< 2>&1 | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
 
 %.gc.out: %.ckt $(TARGET)$(SO_EXTENSION)
-	$(GNUCAP) $(ATTACH) -b $< 2>&1 | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
+	$(GNUCAP) $(ATTACH) -b $< 2>&1 $(TESTFILTER) | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
 
 .PHONY: %.reg install
