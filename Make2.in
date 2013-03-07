@@ -38,7 +38,7 @@ $(TARGET) : $(TARGET)$(SO_EXTENSION)
 $(TARGET)$(SO_EXTENSION) : $(OBJS) Makefile
 	$(CCC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(TARGET)$(SO_EXTENSION)
 
-clean: $(HDRS)
+clean: $(HDRS) clean-check
 	-rm *.o $(TARGET)$(SO_EXTENSION) $(TARGET) $(CHECK:%=%.gc.out) $(CHECK:%=%.ref)
 
 spice-wrapper.o: spice-wrapper.cc wrapper.h
@@ -68,4 +68,7 @@ ATTACH=-a ./$(TARGET)$(SO_EXTENSION)
 %.gc.out: %.ckt $(TARGET)$(SO_EXTENSION)
 	$(GNUCAP) $(ATTACH) -b $< 2>&1 $(TESTFILTER) | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
 
-.PHONY: %.reg install
+clean-check:
+	rm -f *.gc.out
+
+.PHONY: %.reg install clean-check
