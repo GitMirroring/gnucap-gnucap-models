@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.67])
-AC_INIT([gnucap-spice3f5], [0.0.0], [felix@salfelder.org])
+AC_INIT([gnucap-spice3f5], [0.0.1-rc0], [felix@salfelder.org])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE
