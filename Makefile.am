@@ -25,7 +25,7 @@ vccs  \
 vcvs  \
 vsrc
 
-SUBDIRS=bjt jfet
+SUBDIRS=bjt jfet dio
 
 DISTHACKFILES=configure install-sh config.sub config.guess Makefile.in aclocal.m4 config.h.in
 dist-hack: @PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz
