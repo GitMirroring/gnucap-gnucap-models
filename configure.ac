@@ -21,12 +21,30 @@ AC_ARG_WITH([gnucap],
   [with_gnucap=no])
 
 AS_IF([ test "x$with_gnucap" != xno],[ 
-	GNUCAP_INCLUDE=$with_gnucap/include/gnucap
-	GC_CPPFLAGS=-I$GNUCAP_INCLUDE
-	gnucap_libdir=$with_gnucap/lib/gnucap
-	AC_MSG_CHECKING([gnucap location correctness])
-	# FIXME: provided path could be source root or worse
-	AC_MSG_RESULT([dont know])
+	CPPFLAGS_KEEP=$CPPFLAGS
+	GNUCAP_INCLUDE=
+	if test -f $with_gnucap/include/gnucap/spice-wrapper.cc; then
+		AC_MSG_NOTICE(suspecting gnucap install prefix)
+		GNUCAP_INCLUDE=$with_gnucap/include/gnucap
+		gnucap_libdir=$with_gnucap/lib/gnucap
+	elif test -f $with_gnucap/include/spice-wrapper.cc; then
+		AC_MSG_NOTICE(suspecting gnucap source directory)
+		GNUCAP_INCLUDE=$with_gnucap/include
+		gnucap_libdir=$prefix/gnucap/lib
+	else
+		AC_MSG_WARN(dont know what to do)
+	fi
+
+	CPPFLAGS+=" -I$srcdir/bjt -I./Include -I$GNUCAP_INCLUDE"
+	#abusing CPPFLAGS
+	CPPFLAGS+=" -DTRACE_UNTESTED -DSPICE_3f -DPREDICTOR -DAN_pz -DAN_disto -DAN_noise -DHAS_STDLIB -fPIC"
+	AC_CHECK_HEADER([spice-wrapper.cc],[
+		GNUCAP_INCLUDE=$with_gnucap/include
+		GC_CPPFLAGS+=" -I$GNUCAP_INCLUDE"
+	],[
+		AC_MSG_ERROR([cannot find gnucap headers])
+	])
+	CPPFLAGS=$CPPFLAGS_KEEP
 ],[ 
 	AC_CHECK_PROG(HAVE_GCCONF, gnucap-conf, true, false)
 
