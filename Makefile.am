@@ -1,3 +1,4 @@
+ACLOCAL_AMFLAGS = -I m4
 
 ALL_SUBDIRS=asrc  \
 bjt   \
@@ -28,6 +29,7 @@ vsrc
 SUBDIRS=bjt jfet dio
 
 DISTHACKFILES=configure install-sh config.sub config.guess Makefile.in aclocal.m4 config.h.in
+
 dist-hack: @PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz
 @PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz:
 	git archive --format=tar --prefix=@PACKAGE_NAME@-@PACKAGE_VERSION@/ HEAD |\
