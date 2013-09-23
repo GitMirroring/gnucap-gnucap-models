@@ -1,3 +1,4 @@
+ACLOCAL_AMFLAGS = -I m4
 
 ALL_SUBDIRS=asrc  \
 bjt   \
