@@ -48,10 +48,10 @@ AS_IF([ test "x$with_gnucap" != xno],[
 	])
 	CPPFLAGS=$CPPFLAGS_KEEP
 ],[
-	AC_CHECK_PROG(HAVE_GCCONF, gnucap-conf, true, false)
+	AC_CHECK_PROG(HAVE_GCCONF, gnucap-conf$_program_suffix, true, false)
 
 	if test "x$HAVE_GCCONF" = "xfalse"; then
-		AC_MSG_ERROR([cannot find gnucap-conf, see README, try --with-gnucap])
+		AC_MSG_ERROR([cannot find gnucap-conf$_program_suffix, see README, try --with-gnucap])
 	fi
 
 	GC_CPPFLAGS+=$(gnucap-conf$_program_suffix --cppflags)
@@ -88,7 +88,8 @@ AC_OUTPUT
 AC_MSG_RESULT([
 ** Configuration summary for $PACKAGE $VERSION:
 
-   prefix:       $prefix
-   GC_CPPFLAGS:  $GC_CPPFLAGS
-   plugindir:    $gnucap_libdir
+   prefix:        $prefix
+   GC_CPPFLAGS:   $GC_CPPFLAGS
+   GNUCAP_INCLUDE:$GNUCAP_INCLUDE
+   plugindir:     $gnucap_libdir
 ])

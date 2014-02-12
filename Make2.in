@@ -38,10 +38,14 @@ $(TARGET) : $(TARGET)$(SO_EXTENSION)
 $(TARGET)$(SO_EXTENSION) : $(OBJS) Makefile
 	$(CCC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(TARGET)$(SO_EXTENSION)
 
+distclean: clean
+
 clean: $(HDRS) clean-check
-	-rm *.o $(TARGET)$(SO_EXTENSION) $(TARGET) $(CHECK:%=%.gc.out) $(CHECK:%=%.ref)
+	-rm -f *.o $(TARGET)$(SO_EXTENSION) $(TARGET) $(CHECK:%=%.gc.out) $(CHECK:%=%.ref)
 
 spice-wrapper.o: spice-wrapper.cc wrapper.h
+
+spice-wrapper.o: CPPFLAGS+=-DADD_VERSION
 
 $(OBJS) : $(HDRS)
 
@@ -54,8 +58,10 @@ install: all
 #regression testing
 check: $(TESTS:%=%.reg)
 
-%.reg: %.gc.out %.ref
-	diff -c $+
+DIFFWIDTH = 200
+
+%.reg: %.ref %.gc.out
+	diff -y -W$(DIFFWIDTH) $+
 
 %.ref: %.ckt.out
 	grep -v '^@' $< $(TESTFILTER) | grep -v '^#' > $@
