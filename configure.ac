@@ -15,7 +15,8 @@ AC_PROG_MAKE_SET
 AC_PROG_CXX
 AC_PROG_LIBTOOL
 
-iverilog=no
+AS_IF([ test x$program_suffix = xNONE ],,[_program_suffix=$program_suffix])
+
 AC_ARG_WITH([gnucap],
   [AS_HELP_STRING([--with-gnucap], [gnucap location])],
   [],
@@ -46,18 +47,18 @@ AS_IF([ test "x$with_gnucap" != xno],[
 		AC_MSG_ERROR([cannot find gnucap headers])
 	])
 	CPPFLAGS=$CPPFLAGS_KEEP
-],[ 
-	AC_CHECK_PROG(HAVE_GCCONF, gnucap-conf, true, false)
+],[
+	AC_CHECK_PROG(HAVE_GCCONF, gnucap-conf$_program_suffix, true, false)
 
 	if test "x$HAVE_GCCONF" = "xfalse"; then
-		AC_MSG_ERROR([cannot find gnucap-conf, see README, try --with-gnucap])
+		AC_MSG_ERROR([cannot find gnucap-conf$_program_suffix, see README, try --with-gnucap])
 	fi
-	gc=`which gnucap-conf`
+	gc=`which gnucap-conf$_program_suffix`
 	AC_MSG_NOTICE(asking $gc)
 
-	GC_CPPFLAGS=$(gnucap-conf --cppflags)
-	GNUCAP_INCLUDE=$(gnucap-conf --includedir)
-	gnucap_libdir=$(gnucap-conf --libdir)
+	GC_CPPFLAGS=$($gc --cppflags)
+	GNUCAP_INCLUDE=$($gc --includedir)
+	gnucap_libdir=$($gc --libdir)
 ] )
 AC_SUBST([GC_CPPFLAGS])
 AC_SUBST([GNUCAP_INCLUDE])
