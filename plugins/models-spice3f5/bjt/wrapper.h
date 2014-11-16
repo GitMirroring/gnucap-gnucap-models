@@ -18,4 +18,7 @@ extern "C" {
 #define VALUE_NAME "area"
 
 static std::string port_names[] = {"c", "b", "e", "s"};
-static std::string state_names[] = {};
+static std::string state_names[] = {"vbe", "vbc", "cc", "cb",
+    "gpi", "gmu", "gm", "go", "qbe", "cqbe", "qbc", "cqbc",
+    "qcs", "cqcs", "qbx", "cqbx", "gx", "cexbc", "geqcb",
+    "gccs", "geqbx"};

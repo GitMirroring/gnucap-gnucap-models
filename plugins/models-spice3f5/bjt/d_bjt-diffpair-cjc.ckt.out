@@ -9,6 +9,7 @@ stashing as npn1:0
 pnp1: already installed, replacing
 stashing as pnp1:0
 difpair ckt - simple differential pair 
+
 #           v(1)       v(2)       v(3)       v(4)       v(5)       v(6)      
 + v(7)       v(8)       v(9)      
  27.       -76.611p   -0.0076611 -0.0076611  5.2291     5.2291    -0.76997   

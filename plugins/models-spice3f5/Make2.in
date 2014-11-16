@@ -1,0 +1,80 @@
+# $Id$ -*- Makefile -*-
+
+INSTALL_DIR = @gnucap_libdir@
+SPICE_INCLUDE = @SPICE_INCLUDE@
+GNUCAP_INCLUDE = @GNUCAP_INCLUDE@
+VPATH = .:$(SPICE_INCLUDE):$(GNUCAP_INCLUDE)
+GNUCAP = @GNUCAP@
+
+C_SRCS = $(CFILES) devsup.c
+CC_SRCS = spice-wrapper.cc
+
+OBJS = ${CC_SRCS:.cc=.o} ${C_SRCS:.c=.o}
+
+CC = gcc
+CCC = g++
+
+CFLAGS = -O2 -g -I. -I$(SPICE_INCLUDE) -DTRACE_UNTESTED -D$(SPICE_VERSION) \
+ -DPREDICTOR -DAN_pz -DAN_disto -DAN_noise \
+ -DHAS_STDLIB -fPIC
+
+CCFLAGS = $(CFLAGS) -I$(GNUCAP_INCLUDE) -Wall -Wextra 
+
+LDFLAGS = -shared
+
+LIBS = 
+
+SO_EXTENSION = .so
+
+MAKEFLAGS += -r
+.SUFFIXES:
+.SUFFIXES: .o .cc .c
+.cc.o:; $(CCC) $(CCFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c $<
+.c.o:; $(CC) $(CFLAGS) -c $<
+
+$(TARGET) : $(TARGET)$(SO_EXTENSION)
+	echo $(TARGET) done
+
+$(TARGET)$(SO_EXTENSION) : $(OBJS) Makefile
+	$(CCC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(TARGET)$(SO_EXTENSION)
+
+distclean: clean
+
+clean: $(HDRS) clean-check
+	-rm -f *.o $(TARGET)$(SO_EXTENSION) $(TARGET) $(CHECK:%=%.gc.out) $(CHECK:%=%.ref)
+
+spice-wrapper.o: spice-wrapper.cc wrapper.h
+
+spice-wrapper.o: CPPFLAGS+=-DADD_VERSION
+
+$(OBJS) : $(HDRS)
+
+all: $(TARGET)$(SO_EXTENSION)
+
+install: all
+	mkdir --parents $(INSTALL_DIR)
+	cp $(TARGET)$(SO_EXTENSION) $(INSTALL_DIR)
+
+#regression testing
+check: $(TESTS:%=%.reg)
+
+DIFFWIDTH = 200
+
+%.reg: %.ref %.gc.out
+	diff -y -W$(DIFFWIDTH) $+
+
+%.ref: %.ckt.out
+	grep -v '^@' $< $(TESTFILTER) | grep -v '^#' > $@
+
+ATTACH=-a ./$(TARGET)$(SO_EXTENSION)
+
+%.gc.out: %.gc $(TARGET)$(SO_EXTENSION)
+	$(GNUCAP) $(ATTACH) $< 2>&1 | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
+
+%.gc.out: %.ckt $(TARGET)$(SO_EXTENSION)
+	$(GNUCAP) $(ATTACH) -b $< 2>&1 $(TESTFILTER) | grep -v '^#' | grep -v '^\*' | grep -v '^@' > $@
+
+clean-check:
+	rm -f *.gc.out
+
+.PHONY: %.reg install clean-check

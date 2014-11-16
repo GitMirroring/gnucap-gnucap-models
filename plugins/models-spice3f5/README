@@ -35,8 +35,7 @@ Some models fail on attachment.  Most of the ones that fail would not
 be recommended even if they did work.  The gnucap native models have
 better performance.
 
-
-BUILD INSTRUCTIONS
+OLD BUILD INSTRUCTIONS
 
 This applies to this snapshot.  It will change.
 
@@ -69,6 +68,16 @@ uses the environment variable LD_LIBRARY_PATH to locate them.  If the
 name has a slash, the usual rules for finding files apply.
 
 To install, you can copy the ".so" files to where you want them.
+
+INSTALL INSTRUCTIONS
+
+Works for gnucap-uf. just configure and build. --program-suffix is applied to
+gnucap-conf.  currently, this will just build dio, bjt and jfet.
+
+CHECKS
+
+the check target is incomplete and not suited for automated testing.
+"make -k check | less" works reasonably well.
 
 STATUS
 
