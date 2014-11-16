@@ -22,8 +22,13 @@ to select which one.  If you want variants of the same model, such as
 BSIM420 and BSIM460, you may need to make changes to the wrapper.h
 file and recompile.
 
-
 BUILD INSTRUCTIONS
+
+this is an autotools package. see INSTALL for generic instructions.
+in case gnucap-conf is not in your $PATH, you are supposed to type
+./configure --with-gnucap=$location # (currently only supports prefix)
+
+OLD BUILD INSTRUCTIONS
 
 This applies to this snapshot.  It will change.
 
