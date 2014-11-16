@@ -1,0 +1,16 @@
+#! /bin/sh
+
+MODULES="plugins/models-bsim plugins/models-spice3f5"
+       #"plugins/models-jfet etc. "
+
+libtoolize \
+&& aclocal \
+&& automake --gnu --add-missing \
+&& autoconf
+
+for i in $MODULES; do
+	( cd $i;
+	echo autogen in $( pwd )
+	./bootstrap || ( echo trouble in $i/bootstrap; exit 1 )
+	) || exit 1
+done
