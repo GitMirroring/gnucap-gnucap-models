@@ -20,6 +20,11 @@ install:
 	$(MAKE) -C $$dir install; \
 	done
 
+check:
+	for dir in $(SUBDIRS); do \
+	$(MAKE) -C $$dir check; \
+	done
+
 untest_exclude = \(\[\]\)\|\(extern\)\|\(switch\)\|\(enum\)\|\(union\)\|\(constexpr\)\|\(struct\)\|\(class\)\|\(namespace\)\|\(untested\)\|\(itested\)
 colon_exclude = \(public\)\|\(protected\)\|\(private\)\|\(vim\)\|\(::$$\)\|\(\/\/.*:\)\|\(^.\*\)\|\(explicit\)
 
