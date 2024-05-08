@@ -1,4 +1,5 @@
-simple diode test
+// simple diode test
+spice
 V1   1  0  10. AC 1
 R1   1  2  100.K
 D1   2  0  ddd   area=1
