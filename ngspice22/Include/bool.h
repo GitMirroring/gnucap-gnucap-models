@@ -1,0 +1,14 @@
+#ifndef _BOOL_H
+#define _BOOL_H
+
+// gnucap typedef unsigned char bool;
+typedef int BOOL ;
+
+#define BOOLEAN int
+#define TRUE  1
+#define FALSE 0
+#define NO    0
+#define YES   1
+
+
+#endif

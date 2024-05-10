@@ -1,0 +1,6 @@
+
+spice headers:
+- need to remove "class" used as variable name
+
+bjt:
+- still working. ac needs SenCond fix
