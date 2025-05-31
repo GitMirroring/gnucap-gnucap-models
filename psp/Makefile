@@ -1,12 +1,18 @@
 
-MGFLAGS =
+MGFLAGS = -a mgopt/nonoise.so
 MODELGEN_VERILOG = gnucap-mg-vams
 GNUCAP_CONF = gnucap-conf
 GNUCAP_CPPFLAGS = $(shell $(GNUCAP_CONF) --cppflags) -DADD_VERSION -DPIC
 CXXFLAGS = -fno-var-tracking-assignments -O0 -Wall -g
 
-all: psp104_n.so psp104_p.so \
+	
+PLUGINS_SO = psp104_n.so psp104_p.so \
      psp104_nqs_n.so psp104_nqs_p.so
+
+PLUGINS_CC = ${PLUGINS_SO:%.so=%.cc}
+
+all: ${PLUGINS_SO}
+cc: ${PLUGINS_CC}
 
 %.cc: %.vams
 	${MODELGEN_VERILOG} -I psp104 --expand-paramset --nodump-unreachable --nogen-module ${MGFLAGS} -o $@ --cc $<
@@ -22,3 +28,5 @@ all: psp104_n.so psp104_p.so \
 
 TESTDIR = tests
 include ../Make.test
+
+.PHONY: cc all
