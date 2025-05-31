@@ -1,0 +1,6 @@
+
+`include "psp104.va"
+
+paramset PSP104VA_P PSP104VA
+	.TYPE = -1;
+endparamset

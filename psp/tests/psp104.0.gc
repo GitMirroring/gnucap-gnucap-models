@@ -1,0 +1,38 @@
+load mgsim
+load vams/vsine.so
+load ./psp104_n.so
+load ./psp104_p.so
+
+options vmin=-1.8
+options vmax=1.8
+
+verilog
+
+// ground 0 // soon
+
+module inv(out in Vdd gnd);
+  PSP104VA_P #() P(.d(out) .g(in) .s(Vdd) .b(Vdd));
+  PSP104VA_N #() N(.d(out) .g(in) .s(gnd) .b(gnd));
+endmodule
+
+parameter v = 0
+parameter f = 1e9
+vsine #(.dc(v) .ampl(1.8) .freq(f) .samples(6)) vin (1,0);
+inv #() i1(2,1,Vdd,0);
+vsource #(.dc(1.8)) supply(Vdd 0);
+
+resistor #(100k) load(2 0);
+
+print dc v(nodes)
+dc v -1.5 1.5 .1
+
+print tran v(nodes)
+tr 1.12e-9 basic | {tee tr.out}
+
+* bug in noise/tr_restore
+* tr 2.12e-9 basic | {tee -a tr.out}
+
+print ac vm(2) vp(2)
+ac 1e7 1e12 * 10
+
+status notime
