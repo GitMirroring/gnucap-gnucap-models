@@ -1,0 +1,191 @@
+paramset nch bsim4va;
+  parameter real l=0.09u;
+   parameter real w=10.0u;
+   parameter integer nf = 1;
+   parameter integer rgeomod = 0 from [0:0];
+   parameter real ad=0;
+   parameter real pd=0;
+   parameter real as=0;
+   parameter real ps=0;
+   parameter real sa=0;
+   parameter real sb=0;
+   parameter real sd=0;
+ .a0=2; .a1=0; .a2=1; .acde=1; .acnqsmod=0; .ad=ad; .ados=1.1; .agidl=0.0001; .agisl=0.0002; .ags=1e-20; .aigbacc=0.012; .aigbinv=0.014; .aigc=0.012; .aigd=0.01; .aigs=0.012; .alpha0=0.074; .alpha1=0.005; .as=as; .at=53000; .b0=-1e-20; .b1=0; .bdos=1.0; .beta0=30; .bgidl=2.1e9; .bgisl=2.1e9; .bigbacc=0.0028; .bigbinv=0.004; .bigc=0.0028; .bigd=0.003; .bigs=0.0028; .binunit=1; .bvd=10; .bvs=10; .capmod=1; .cdsc=0.0002; .cdscb=0; .cdscd=0; .cgbo=2.56e-11; .cgdl=2.495e-10; .cgdo=6.238e-10; .cgidl=0.0001; .cgisl=0.0002; .cgsl=2.495e-10; .cgso=6.238e-10; .cigbacc=0.002; .cigbinv=0.004; .cigc=0.002; .cigd=0.0015; .cigs=0.002; .cit=0; .cjd=0.0005; .cjs=0.0005; .cjswd=5e-10; .cjswgd=5e-10; .cjswgs=3e-10; .cjsws=5e-10; .ckappad=0.03; .ckappas=0.03; .cvchargemod=0; .delta=0.01; .diomod=1; .dmcg=0; .dmcgt=0; .dmci=0; .dmdg=0; .drout=0.45; .dsub=2; .dtox=8e-10; .dvt0=1.8; .dvt0w=0; .dvt1=0.52; .dvt1w=0; .dvt2=-0.032; .dvt2w=0; .dvtp0=1e-7; .dvtp1=0.05; .dwb=0; .dwg=0; .dwj=0; .egidl=0.8; .egisl=0.8; .eigbinv=1.1; .eot=1.8e-9; .epsrgate=11.7; .epsrox=3.9; .eta0=0.05; .etab=0; .fnoimod=1; .fprout=0.2; .gbmin=1e-10; .geomod=1; .igbmod=1; .igcmod=1; .ijthdfwd=0.01; .ijthdrev=0.001; .ijthsfwd=0.01; .ijthsrev=0.001; .jsd=0.0001; .jss=0.0001; .jswd=1e-11; .jswgd=1e-10; .jswgs=1e-10; .jsws=1e-11; .jtsd=1e-4; .jtss=1e-4; .jtsswd=1e-10; .jtsswgd=1e-7; .jtsswgs=1e-7; .jtssws=1e-10; .k1=0.35; .k2=0.05; .k3=0; .k3b=0; .keta=0.04; .kt1=-0.37; .kt1l=0.0; .kt2=-0.042; .ku0=-4e-6; .kvsat=0.2; .kvth0=-2e-8; .l=l; .lambda=4e-10; .lc=5e-9; .level=14; .lint=1e-9; .lku0=1e-6; .lkvth0=1.1e-6; .ll=0; .lln=1; .llodku0=1.1; .llodvth=1.0; .lodeta0=1.0; .lodk2=1.0; .lpe0=5.75e-8; .lpeb=2.3e-10; .lw=0; .lwl=0; .lwn=1; .minv=0.05; .minvcv=2; .mjd=0.5; .mjs=0.5; .mjswd=0.33; .mjswgd=0.33; .mjswgs=0.33; .mjsws=0.33; .mobmod=0; .moin=15; .mtrlcompatmod=1; .mtrlmod=1; .ndep=2.8e18; .nf=nf; .nfactor=1.2; .ngate=5e20; .ngcon=1; .nigbacc=1; .nigbinv=3; .nigc=1; .njd=1; .njs=1; .njts=20.0; .njtsd=15.0; .njtssw=15; .njtsswd=20; .njtsswg=6; .njtsswgd=6; .noff=0.9; .nsd=1e20; .ntox=1; .paramchk=1; .pbd=1; .pbs=1; .pbswd=1; .pbswgd=1; .pbswgs=1; .pbsws=1; .pclm=0.08; .pd=pd; .pdiblc1=0.028; .pdiblc2=0.022; .pdiblcb=-0.005; .pdits=0.2; .pditsd=0.23; .pditsl=2.3e6; .permod=1; .phig=4.05; .phin=0; .pigcd=1; .pku0=0; .pkvth0=0; .poxedge=1; .prt=0; .prwb=6.8e-11; .prwg=0; .ps=ps; .pscbe1=8.14e8; .pscbe2=5e-8; .pvag=1e-20; .rbdb=15; .rbodymod=0; .rbpb=5; .rbpd=15; .rbps=15; .rbsb=15; .rdsmod=0; .rdsw=50; .rdswmin=0; .rdw=50; .rdwmin=0; .rgatemod=1; .rgeomod=0; .rnoia=0.577; .rnoib=0.37; .rsh=0; .rshg=0.4; .rsw=50; .rswmin=0; .sa=sa; .saref=5e-6; .sb=sb; .sbref=5e-6; .sd=sd; .steta0=0; .stk2=0; .tcj=0.001; .tcjsw=0.001; .tcjswg=0.001; .tempmod=0; .tku0=0; .tnjts=0.1; .tnjtsd=0.05; .tnoimod=0; .tnom=27.0; .toxe=1.8e-9; .toxm=1.8e-9; .toxp=1.0e-9; .toxref=1.4e-9; .tpb=0.005; .tpbsw=0.005; .tpbswg=0.005; .trnqsmod=0; .tvfbsdoff=0; .tvoff=0; .type=1; .u0=0.032; .ua=5.0e-11; .ua1=1e-9; .ub=3.5e-18; .ub1=-3.5e-19; .uc=-3e-11; .uc1=0; .ute=-1.5; .vddeot=1.5; .version=4.80; .vfb=-0.55; .voff=-0.15; .voffcv=-0.02; .voffcvl=0; .voffl=0; .vsat=1.1e5; .vth0=0.25; .vtl=2.0e5; .vtsd=10; .vtss=10; .vtsswd=10; .vtsswgd=2; .vtsswgs=2; .vtssws=10; .w=w; .w0=2.5e-6; .wint=5e-9; .wku0=1e-6; .wkvth0=1.1e-6; .wl=0; .wln=1; .wlod=2e-6; .wlodku0=1.1; .wlodvth=1.0; .wr=1; .ww=0; .wwl=0; .wwn=1; .xgl=0; .xgw=0; .xj=2e-8; .xjbvd=1; .xjbvs=1; .xn=6.0; .xpart=1; .xrcrg1=12; .xrcrg2=5; .xtid=3; .xtis=3; .xtsd=0.02; .xtss=0.02; .xtsswd=0.02; .xtsswgd=0.02; .xtsswgs=0.02; .xtssws=0.02;
+endparamset
+
+// Set temperature
+// Define ground
+ground \0 ;
+// Declare voltage sources (drain, gate, source, bulk)
+vsource #(.dc(vd)) sd (.p(d),.n(\0 ));
+vsource #(.dc(vg)) sg (.p(g),.n(\0 ));
+vsource #(.dc(vs)) sb (.p(s),.n(\0 ));
+vsource #(.dc(vb)) sb (.p(b),.n(\0 ));
+// Assign initial voltages
+parameter vd = 0.1 // Drain (fixed)
+parameter vg = 0.0 // Gate (will be overwritten during sweep)
+parameter vs = 0.0 // Source (fixed)
+parameter vb = 0.0 // Bulk (will be overwritten during sweep)
+// Instantiate NMOS transistor using bsim483 model
+module nn (.d(d),.g(g),.s(s),.b(b));
+  nch #(.l(0.09u),.w(10.0u)) N (.d(d),.g(g),.s(s),.b(b));
+endmodule // nn
+
+nn #() N (.d(d),.g(g),.s(s),.b(b));
+// Simulation control
+#           v(b)       i(sd)     
+ 0.6        0.        -436.55E-6 
+ 0.62       0.        -525.32E-6 
+ 0.64       0.        -616.22E-6 
+ 0.66       0.        -707.6E-6  
+ 0.68       0.        -798.25E-6 
+ 0.7        0.        -887.37E-6 
+ 0.72       0.        -974.42E-6 
+ 0.74       0.        -0.0010591 
+ 0.76       0.        -0.0011411 
+ 0.78       0.        -0.0012203 
+ 0.8        0.        -0.0012968 
+ 0.82       0.        -0.0013704 
+ 0.84       0.        -0.0014413 
+ 0.86       0.        -0.0015094 
+ 0.88       0.        -0.0015748 
+ 0.9        0.        -0.0016376 
+ 0.92       0.        -0.0016978 
+ 0.94       0.        -0.0017556 
+ 0.96       0.        -0.001811  
+ 0.98       0.        -0.001864  
+ 1.         0.        -0.0019149 
+ 1.02       0.        -0.0019635 
+ 1.04       0.        -0.0020101 
+ 1.06       0.        -0.0020547 
+ 1.08       0.        -0.0020973 
+ 1.1        0.        -0.0021381 
+ 1.12       0.        -0.0021772 
+ 1.14       0.        -0.0022145 
+ 1.16       0.        -0.0022501 
+ 1.18       0.        -0.0022842 
+ 1.2        1.E-15    -0.0023167 
+ 0.6       -0.3       -180.94E-6 
+ 0.62      -0.3       -242.63E-6 
+ 0.64      -0.3       -312.73E-6 
+ 0.66      -0.3       -388.95E-6 
+ 0.68      -0.3       -468.99E-6 
+ 0.7       -0.3       -550.92E-6 
+ 0.72      -0.3       -633.28E-6 
+ 0.74      -0.3       -715.03E-6 
+ 0.76      -0.3       -795.46E-6 
+ 0.78      -0.3       -874.09E-6 
+ 0.8       -0.3       -950.64E-6 
+ 0.82      -0.3       -0.0010249 
+ 0.84      -0.3       -0.0010968 
+ 0.86      -0.3       -0.0011663 
+ 0.88      -0.3       -0.0012334 
+ 0.9       -0.3       -0.001298  
+ 0.92      -0.3       -0.0013603 
+ 0.94      -0.3       -0.0014202 
+ 0.96      -0.3       -0.0014778 
+ 0.98      -0.3       -0.0015332 
+ 1.        -0.3       -0.0015864 
+ 1.02      -0.3       -0.0016376 
+ 1.04      -0.3       -0.0016867 
+ 1.06      -0.3       -0.0017338 
+ 1.08      -0.3       -0.001779  
+ 1.1       -0.3       -0.0018224 
+ 1.12      -0.3       -0.0018641 
+ 1.14      -0.3       -0.001904  
+ 1.16      -0.3       -0.0019423 
+ 1.18      -0.3       -0.001979  
+ 1.2       -0.3       -0.0020142 
+ 0.6       -0.6       -57.741E-6 
+ 0.62      -0.6       -87.127E-6 
+ 0.64      -0.6       -126.36E-6 
+ 0.66      -0.6       -175.57E-6 
+ 0.68      -0.6       -233.78E-6 
+ 0.7       -0.6       -299.16E-6 
+ 0.72      -0.6       -369.57E-6 
+ 0.74      -0.6       -442.96E-6 
+ 0.76      -0.6       -517.7E-6  
+ 0.78      -0.6       -592.59E-6 
+ 0.8       -0.6       -666.79E-6 
+ 0.82      -0.6       -739.74E-6 
+ 0.84      -0.6       -811.06E-6 
+ 0.86      -0.6       -880.52E-6 
+ 0.88      -0.6       -947.97E-6 
+ 0.9       -0.6       -0.0010133 
+ 0.92      -0.6       -0.0010766 
+ 0.94      -0.6       -0.0011377 
+ 0.96      -0.6       -0.0011967 
+ 0.98      -0.6       -0.0012536 
+ 1.        -0.6       -0.0013085 
+ 1.02      -0.6       -0.0013614 
+ 1.04      -0.6       -0.0014123 
+ 1.06      -0.6       -0.0014613 
+ 1.08      -0.6       -0.0015085 
+ 1.1       -0.6       -0.0015538 
+ 1.12      -0.6       -0.0015975 
+ 1.14      -0.6       -0.0016395 
+ 1.16      -0.6       -0.0016798 
+ 1.18      -0.6       -0.0017186 
+ 1.2       -0.6       -0.0017558 
+ 0.6       -0.9       -15.723E-6 
+ 0.62      -0.9       -25.475E-6 
+ 0.64      -0.9       -40.522E-6 
+ 0.66      -0.9       -62.656E-6 
+ 0.68      -0.9       -93.357E-6 
+ 0.7       -0.9       -133.32E-6 
+ 0.72      -0.9       -182.2E-6  
+ 0.74      -0.9       -238.68E-6 
+ 0.76      -0.9       -300.87E-6 
+ 0.78      -0.9       -366.8E-6  
+ 0.8       -0.9       -434.76E-6 
+ 0.82      -0.9       -503.45E-6 
+ 0.84      -0.9       -571.96E-6 
+ 0.86      -0.9       -639.64E-6 
+ 0.88      -0.9       -706.07E-6 
+ 0.9       -0.9       -770.99E-6 
+ 0.92      -0.9       -834.22E-6 
+ 0.94      -0.9       -895.65E-6 
+ 0.96      -0.9       -955.22E-6 
+ 0.98      -0.9       -0.0010129 
+ 1.        -0.9       -0.0010687 
+ 1.02      -0.9       -0.0011227 
+ 1.04      -0.9       -0.0011748 
+ 1.06      -0.9       -0.0012251 
+ 1.08      -0.9       -0.0012737 
+ 1.1       -0.9       -0.0013205 
+ 1.12      -0.9       -0.0013656 
+ 1.14      -0.9       -0.0014091 
+ 1.16      -0.9       -0.0014511 
+ 1.18      -0.9       -0.0014915 
+ 1.2       -0.9       -0.0015304 
+ 0.6       -1.2       -4.2444E-6 
+ 0.62      -1.2       -7.0222E-6 
+ 0.64      -1.2       -11.566E-6 
+ 0.66      -1.2       -18.912E-6 
+ 0.68      -1.2       -30.472E-6 
+ 0.7       -1.2       -47.907E-6 
+ 0.72      -1.2       -72.771E-6 
+ 0.74      -1.2       -106.05E-6 
+ 0.76      -1.2       -147.83E-6 
+ 0.78      -1.2       -197.21E-6 
+ 0.8       -1.2       -252.61E-6 
+ 0.82      -1.2       -312.17E-6 
+ 0.84      -1.2       -374.22E-6 
+ 0.86      -1.2       -437.42E-6 
+ 0.88      -1.2       -500.8E-6  
+ 0.9       -1.2       -563.69E-6 
+ 0.92      -1.2       -625.64E-6 
+ 0.94      -1.2       -686.35E-6 
+ 0.96      -1.2       -745.62E-6 
+ 0.98      -1.2       -803.34E-6 
+ 1.        -1.2       -859.44E-6 
+ 1.02      -1.2       -913.87E-6 
+ 1.04      -1.2       -966.63E-6 
+ 1.06      -1.2       -0.0010177 
+ 1.08      -1.2       -0.0010672 
+ 1.1       -1.2       -0.001115  
+ 1.12      -1.2       -0.0011612 
+ 1.14      -1.2       -0.0012058 
+ 1.16      -1.2       -0.0012489 
+ 1.18      -1.2       -0.0012905 
+ 1.2       -1.2       -0.0013307 
