@@ -1,0 +1,24 @@
+MODELGEN_VERILOG = gnucap-mg-vams
+GNUCAP_CONF = gnucap-conf
+GNUCAP_CPPFLAGS = $(shell $(GNUCAP_CONF) --cppflags) -DADD_VERSION -DPIC
+GNUCAP_INCLUDE = $(shell $(GNUCAP_CONF) --includedir)
+CXXFLAGS = -fno-var-tracking-assignments -O0 -Wall -g
+MGFLAGS = -I ${GNUCAP_INCLUDE}
+
+PLUGINS_CC = $(PLUGINS_SO:%.so=%.cc)
+
+# '%' is the wildcard character. Rules match any filename with specific extension.
+%.cc: %.va
+	${MODELGEN_VERILOG} --expand-paramset --nodump-unreachable --nogen-module ${MGFLAGS} -o $@ --cc $<
+
+${PLUGINS_CC}: MGFLAGS += --gen-module
+
+%.dump: %.va
+	${MODELGEN_VERILOG} -I psp104 --expand-paramset --nodump-unreachable --nodump-module ${MGFLAGS} -o $@ --dump $<
+
+%.o: %.cc
+	${CXX} $(GNUCAP_CPPFLAGS) $(CPPFLAGS) -shared -fPIC ${GNUCAP_CXXFLAGS} ${CXXFLAGS} $< -o $@ -c
+
+%.so: %.o
+	${CXX} -shared ${GNUCAP_LDFLAGS} ${LDFLAGS} $< -o $@
+

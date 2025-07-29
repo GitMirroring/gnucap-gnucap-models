@@ -1,0 +1,32 @@
+verilog
+load mgsim
+load ../rram_v_1_0_0.so
+
+ground \0 ;
+parameter delta_gap=1e-4
+parameter model_switch=0
+rram_v_1_0_0 #(.gap_ini(gap_ini), .model_switch(model_switch), .deltaGap0(delta_gap) X1(in, \0 );
+
+spice
+Vin 0 in pulse 0 -2 1us   4ms  4ms  1us 10ms
+
+.options trtol=1
+
+* * set "dynamic" mode. with noise.
+* .parameter delta_gap=5e-5
+* .parameter model_switch=1
+
+.parameter gap_ini = 19e-10
+.print tran v(in) i(Vin) iter(0)
+.tran 8m .1m basic
+
+.delete Vin
+Vin in 0 pulse 0 -2 1us   4ms  4ms  1us 10ms
+
+.parameter gap_ini = 2e-10
+.print tran v(in) i(Vin) iter(0)
+.tran 8m .1m basic
+
+.status notime
+.end
+

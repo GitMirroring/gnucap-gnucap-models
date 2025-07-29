@@ -1,0 +1,22 @@
+model and "benchmark" from 10_4231_D37H1DN48 archive
+
+rram*.va: model from archive, with mods
+tests/*.sp: original netlists
+tests/*.gc: adopted for testing
+ref/*gc.out: reference output
+
+model mods, see GNUCAP comments in rram*.va
+- fix: disable bound_step unless noise requested
+- BUG in gnucap-mg-vams dependency tracking: gap must be local for now.
+
+remarks:
+- "pulseSweep" results resemble reference from pdf, including noise.
+
+- "dc sweep" in "standard mode": close to reference from pdf
+
+- "dc sweep" actually runs transient. dc won't work.
+
+- dc sweep in "dynamic mode" has issues. probably due to broken model
+  - random noise sampling technically broken. missing lower bound for bandwith.
+  - deltaGap0 in "dcSweep" test is 5e-5. order of magnitude looks wrong, .05 in
+    pulseSweep..
