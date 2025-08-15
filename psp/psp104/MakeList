@@ -1,6 +1,6 @@
 SECTION = psp/psp104
 MODEL = psp104
-TARGET = $(MODEL)
+TARGET = $(MODEL) $(MODEL)_nmos $(MODEL)_pmos
 
 PLUGINS_SO = ${TARGET:%=%.so}
 

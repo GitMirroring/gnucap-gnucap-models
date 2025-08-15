@@ -1,9 +1,12 @@
 SECTION = psp/psp104_nqs
 MODEL = psp104_nqs
-TARGET = $(MODEL)
+TARGET = $(MODEL) $(MODEL)_nmos $(MODEL)_pmos
 MGFLAGS = -I ../psp104
 
 PLUGINS_SO = ${TARGET:%=%.so}
 
 TESTDIR = NOT_SPECIFIED_YET
 TESTCASES = NOT_SPECIFIED_YET
+
+
+
