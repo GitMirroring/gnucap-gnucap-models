@@ -1,0 +1,119 @@
+// ******** psp104 nqs nmos paramset ********
+// lukas deutz 2025
+paramset N1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=1; .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+// ******** psp104 nqs pmos paramset ********
+// lukas deutz 2025
+paramset P1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=(- 1); .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+//* One-shot trigger (tran) ported from BSIM481/benchmark_test/gstage.b4
+//* Enable verilog mode
+ground \0 ;
+resistor #(.r(100k)) Rsource (.p(in),.n(g));
+resistor #(.r(25k)) Rload (.p(d),.n(vdd));
+N1 #(.w(4u),.l(0.09u)) M1 (.d(d),.g(g),.s(\0 ),.b(\0 ));
+vsource #(.dc(1.8)) Vdd (.p(vdd),.n(\0 ));
+vsine #(.dc(1.2),.mag(0.1)) Vin (.p(in),.n(\0 ));
+#            
+ 0.          
+#Freq         vdb(d)       iter(0)     
+ 100.        -62.04412     0.          
+ 125.8925    -62.04412     0.          
+ 158.4893    -62.04412     0.          
+ 199.5262    -62.04412     0.          
+ 251.1886    -62.04412     0.          
+ 316.2278    -62.04412     0.          
+ 398.1072    -62.04412     0.          
+ 501.1872    -62.04412     0.          
+ 630.9573    -62.04412     0.          
+ 794.3282    -62.04412     0.          
+ 1.E+3       -62.04412     0.          
+ 1.258925E+3 -62.04412     0.          
+ 1.584893E+3 -62.04412     0.          
+ 1.995262E+3 -62.04412     0.          
+ 2.511886E+3 -62.04412     0.          
+ 3.162278E+3 -62.04412     0.          
+ 3.981072E+3 -62.04412     0.          
+ 5.011872E+3 -62.04412     0.          
+ 6.309573E+3 -62.04412     0.          
+ 7.943282E+3 -62.04412     0.          
+ 10.E+3      -62.04412     0.          
+ 12.58925E+3 -62.04412     0.          
+ 15.84893E+3 -62.04412     0.          
+ 19.95262E+3 -62.04412     0.          
+ 25.11886E+3 -62.04412     0.          
+ 31.62278E+3 -62.04412     0.          
+ 39.81072E+3 -62.04412     0.          
+ 50.11872E+3 -62.04412     0.          
+ 63.09573E+3 -62.04412     0.          
+ 79.43282E+3 -62.04412     0.          
+ 100.E+3     -62.04412     0.          
+ 125.8925E+3 -62.04412     0.          
+ 158.4893E+3 -62.04413     0.          
+ 199.5262E+3 -62.04413     0.          
+ 251.1886E+3 -62.04414     0.          
+ 316.2278E+3 -62.04415     0.          
+ 398.1072E+3 -62.04417     0.          
+ 501.1872E+3 -62.04421     0.          
+ 630.9573E+3 -62.04426     0.          
+ 794.3282E+3 -62.04435     0.          
+ 1.E+6       -62.04448     0.          
+ 1.258925E+6 -62.0447      0.          
+ 1.584893E+6 -62.04504     0.          
+ 1.995262E+6 -62.04558     0.          
+ 2.511886E+6 -62.04643     0.          
+ 3.162278E+6 -62.04778     0.          
+ 3.981072E+6 -62.04993     0.          
+ 5.011872E+6 -62.05332     0.          
+ 6.309573E+6 -62.05871     0.          
+ 7.943282E+6 -62.06722     0.          
+ 10.E+6      -62.08068     0.          
+ 12.58925E+6 -62.10192     0.          
+ 15.84893E+6 -62.13538     0.          
+ 19.95262E+6 -62.18786     0.          
+ 25.11886E+6 -62.26976     0.          
+ 31.62278E+6 -62.39642     0.          
+ 39.81072E+6 -62.58981     0.          
+ 50.11872E+6 -62.87945     0.          
+ 63.09573E+6 -63.30173     0.          
+ 79.43282E+6 -63.89563     0.          
+ 100.E+6     -64.69432     0.          
+ 125.8925E+6 -65.71469     0.          
+ 158.4893E+6 -66.95036     0.          
+ 199.5262E+6 -68.37231     0.          
+ 251.1886E+6 -69.93646     0.          
+ 316.2278E+6 -71.59253     0.          
+ 398.1072E+6 -73.28968     0.          
+ 501.1872E+6 -74.97782     0.          
+ 630.9573E+6 -76.60663     0.          
+ 794.3282E+6 -78.12511     0.          
+ 1.E+9       -79.48435     0.          
+Gnucap   System status
+iterations: op=0, dc=7, tran=0, fourier=0, total=78
+transient timesteps: accepted=0, rejected=0, total=0
+nodes: user=4, subckt=0, model=27, total=31
+dctran density=52.9%, ac density=52.9%

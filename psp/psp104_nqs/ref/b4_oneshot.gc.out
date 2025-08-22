@@ -1,0 +1,173 @@
+// ******** psp104 nqs nmos paramset ********
+// lukas deutz 2025
+paramset N1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=1; .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+// ******** psp104 nqs pmos paramset ********
+// lukas deutz 2025
+paramset P1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=(- 1); .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+//* One-shot trigger (tran)
+//* Enable verilog mode
+ground \0 ;
+P1 #(.l(0.2u),.w(3.6u)) Md1 (.d(out1),.g(in),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) Md2 (.d(out1),.g(in),.s(\0 ),.b(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) Md3 (.d(A),.g(out1),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) Md4 (.d(A),.g(out1),.s(\0 ),.b(\0 ));
+capacitor #(.c(100f)) c_out1 (.p(out1),.n(\0 ));
+capacitor #(.c(100f)) c_A (.p(A),.n(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) M1 (.d(Anot),.g(A),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M2 (.d(Anot),.g(A),.s(\0 ),.b(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) M3 (.d(Bnot),.g(in),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M4 (.d(Bnot),.g(in),.s(\0 ),.b(\0 ));
+P1 #(.l(3.6u),.w(1.8u)) M5 (.d(AorBnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M6 (.d(AorBnot),.g(in),.s(in_Anot_j),.b(\0 ));
+N1 #(.l(0.2u),.w(1.8u)) M7 (.d(in_Anot_j),.g(Anot),.s(\0 ),.b(\0 ));
+P1 #(.l(3.6u),.w(1.8u)) M8 (.d(Lnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M9 (.d(Lnot),.g(Bnot),.s(bnot_a_j),.b(\0 ));
+N1 #(.l(0.2u),.w(1.8u)) M10 (.d(bnot_a_j),.g(A),.s(\0 ),.b(\0 ));
+P1 #(.l(3.6u),.w(3.6u)) M11 (.d(out),.g(\0 ),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M12 (.d(out),.g(AorBnot),.s(aorb_lnot_j),.b(\0 ));
+N1 #(.l(0.2u),.w(1.8u)) M13 (.d(aorb_lnot_j),.g(Lnot),.s(\0 ),.b(\0 ));
+vsource #(.dc(1.8)) vcc (.p(dd),.n(\0 ));
+vpulse #(.val0(0.0),.val1(1.8),.td(1n),.rise(0.1n),.fall(0.1n),.width(0.8n),.period(5n)) vin (.p(in),.n(\0 ));
+#Time       v(in)      v(out)     iter(0)   
+open circuit: internal node 447
+did not converge
+ 0.         0.         0.22863    5.159E+3  
+ 50.E-12    15.E-15    0.22863    27.       
+ 110.E-12  -25.E-15    0.22863    91.       
+ 124.E-12   59.E-15    0.22863    136.      
+ 179.E-12  -63.E-15    0.22863    93.       
+ 186.E-12   84.E-15    0.22863    155.      
+ 193.E-12  -85.E-15    0.22863    155.      
+ 206.E-12   86.E-15    0.22863    142.      
+ 219.E-12  -86.E-15    0.22863    143.      
+ 226.E-12   87.E-15    0.22863    153.      
+ 233.E-12  -86.E-15    0.22863    160.      
+ 257.E-12   87.E-15    0.22863    121.      
+ 269.E-12  -86.E-15    0.22863    136.      
+ 275.E-12   87.E-15    0.22863    154.      
+ 287.E-12  -87.E-15    0.22863    130.      
+ 293.E-12   87.E-15    0.22863    152.      
+ 305.E-12  -87.E-15    0.22863    133.      
+ 316.E-12   87.E-15    0.22863    139.      
+ 327.E-12  -86.E-15    0.22863    142.      
+ 338.E-12   87.E-15    0.22863    140.      
+ 349.E-12  -86.E-15    0.22863    132.      
+ 355.E-12   87.E-15    0.22863    154.      
+ 366.E-12  -87.E-15    0.22863    131.      
+ 376.E-12   87.E-15    0.22863    143.      
+ 386.E-12  -87.E-15    0.22863    134.      
+ 396.E-12   87.E-15    0.22863    142.      
+ 406.E-12  -87.E-15    0.22863    144.      
+ 425.E-12   87.E-15    0.22863    126.      
+ 430.E-12  -86.E-15    0.22863    160.      
+ 435.E-12   87.E-15    0.22863    156.      
+ 444.E-12  -86.E-15    0.22863    143.      
+ 453.E-12   87.E-15    0.22863    143.      
+ 458.E-12  -86.E-15    0.22863    151.      
+ 467.E-12   86.E-15    0.22863    134.      
+ 484.E-12  -86.E-15    0.22863    115.      
+ 493.E-12   87.E-15    0.22863    141.      
+ 509.E-12  -86.E-15    0.22863    115.      
+ 517.E-12   87.E-15    0.22863    133.      
+ 533.E-12  -86.E-15    0.22863    111.      
+ 548.E-12   86.E-15    0.22863    125.      
+ 563.E-12  -86.E-15    0.22863    126.      
+ 577.E-12   86.E-15    0.22863    125.      
+ 591.E-12  -86.E-15    0.22863    126.      
+ 598.E-12   86.E-15    0.22863    138.      
+ 624.E-12  -86.E-15    0.22863    95.       
+ 636.E-12   86.E-15    0.22863    113.      
+ 648.E-12  -86.E-15    0.22863    118.      
+ 654.E-12   86.E-15    0.22863    134.      
+ 660.E-12  -86.E-15    0.22863    133.      
+ 1.E-9      86.E-15    0.22863    10.       
+ 1.101E-9   1.8        0.23156    8.        
+ 1.202E-9   1.8        0.85933    7.        
+open circuit: internal node 132
+ 1.303E-9   1.8        1.3165     9.        
+ 1.404E-9   1.8        1.4338     7.        
+ 1.505E-9   1.8        1.2387     8.        
+ 1.703E-9   1.8        0.39275    8.        
+ 1.9E-9     1.8        0.20395    6.        
+ 2.001E-9   41.119E-9  0.29124    8.        
+ 2.003E-9  -24.319E-9  0.28622    12.       
+ 2.004E-9   35.535E-9  0.28571    5.        
+ 2.005E-9  -26.455E-9  0.28532    4.        
+ 2.006E-9   34.022E-9  0.28496    4.        
+ 2.048E-9  -30.714E-9  0.50639    6.        
+ 2.123E-9   31.471E-9  0.97833    7.        
+open circuit: internal node 210
+ 2.257E-9  -31.994E-9  1.3717     10.       
+ 2.391E-9   31.863E-9  1.1845     7.        
+ 2.692E-9  -31.825E-9  0.22946    9.        
+ 2.993E-9   31.789E-9  0.25582    6.        
+ 3.595E-9  -31.764E-9  0.20995    7.        
+ 4.397E-9   31.746E-9  0.24604    6.        
+ 6.E-9     -31.738E-9  0.21205    6.        
+ 6.101E-9   1.8        0.26177    8.        
+open circuit: internal node 132
+ 6.501E-9   1.8        1.3614     12.       
+open circuit: internal node 54
+open circuit: internal node 210
+ 6.634E-9   1.8        1.5235     13.       
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+open circuit: internal node 132
+ 6.701E-9   1.8        1.4038     28.       
+ 6.801E-9   1.8        1.072      9.        
+ 6.9E-9     1.8        0.46343    8.        
+ 7.001E-9   37.396E-9  0.22042    8.        
+open circuit: internal node 210
+open circuit: internal node 262
+open circuit: internal node 418
+ 7.003E-9  -26.316E-9  0.2359     12.       
+ 7.004E-9   34.637E-9  0.24107    4.        
+ 7.005E-9  -27.478E-9  0.24545    4.        
+ 7.006E-9   33.767E-9  0.24928    4.        
+ 7.054E-9  -30.706E-9  0.58287    6.        
+open circuit: internal node 28
+ 7.136E-9   30.995E-9  1.0399     8.        
+ 7.273E-9  -31.11E-9   1.4316     7.        
+ 7.41E-9    31.093E-9  1.2305     7.        
+ 7.734E-9  -31.092E-9  0.21555    9.        
+ 8.058E-9   31.097E-9  0.26449    6.        
+ 8.706E-9  -31.092E-9  0.2005     6.        
+ 9.353E-9   31.088E-9  0.25498    5.        
+ 10.E-9    -31.083E-9  0.20451    5.        
+Gnucap   System status
+iterations: op=0, dc=0, tran=11831, fourier=0, total=11924
+transient timesteps: accepted=91, rejected=279, total=370
+nodes: user=12, subckt=0, model=444, total=456
+dctran density=7.6%, ac density=7.6%

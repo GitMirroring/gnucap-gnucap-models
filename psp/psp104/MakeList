@@ -4,5 +4,23 @@ TARGET = $(MODEL) $(MODEL)_nmos $(MODEL)_pmos
 
 PLUGINS_SO = ${TARGET:%=%.so}
 
-TESTDIR = NOT_SPECIFIED_YET
-TESTCASES = NOT_SPECIFIED_YET
+TESTDIR = ../../bsim/tests
+TESTCASES = b4_
+
+GNUCAP_LOADS = -a mgsim
+#BUG: workaround excessive iterations in op
+GNUCAP_OPTIONS = --options\ vmin=0.0\ vmax=0.0
+
+TEST_PARAMSET_SELECT = interpreted
+
+ifeq ($(TEST_PARAMSET_SELECT), compiled)
+  GNUCAP_LOADS += -a ./$(MODEL)_nmos.so -a ./$(MODEL)_pmos.so
+  GNUCAP_INCLUDES =
+else ifeq ($(TEST_PARAMSET_SELECT), interpreted)
+  GNUCAP_LOADS += -a ./$(MODEL).so --verilog
+  GNUCAP_INCLUDES = -i $(MODEL)_nmos.paramset -i $(MODEL)_pmos.paramset
+  GNUCAP_OPTIONS += \ noninsensitive
+endif
+
+GNUCAP_ARGS =  ${GNUCAP_LOADS} ${GNUCAP_INCLUDES} ${GNUCAP_OPTIONS}
+

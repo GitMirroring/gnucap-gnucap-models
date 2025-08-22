@@ -1,0 +1,112 @@
+// ******** psp104 nqs nmos paramset ********
+// lukas deutz 2025
+paramset N1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=1; .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+// ******** psp104 nqs pmos paramset ********
+// lukas deutz 2025
+paramset P1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=(- 1); .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+//* One-Bit Comparator (tran)
+// Enable verilog mode
+ground \0 ;
+capacitor #(.c(30f)) CQ (.p(Qnot),.n(\0 ));
+capacitor #(.c(10f)) CL (.p(Lnot),.n(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) MQLO (.d(out_q),.g(Qnot),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) MQL1 (.d(out_q),.g(Qnot),.s(\0 ),.b(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) MLTO (.d(out_l),.g(Lnot),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) MLT1 (.d(out_l),.g(Lnot),.s(\0 ),.b(\0 ));
+P1 #(.l(3.6u),.w(3.6u)) M11 (.d(Qnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M12 (.d(Qnot),.g(AorBnot),.s(nor3_mid),.b(\0 ));
+N1 #(.l(0.2u),.w(1.8u)) M13 (.d(nor3_mid),.g(Lnot),.s(\0 ),.b(\0 ));
+P1 #(.w(1.8u),.l(3.6u)) M5 (.d(AorBnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M6 (.d(AorBnot),.g(B),.s(nor1_mid),.b(\0 ));
+N1 #(.w(1.8u),.l(0.2u)) M7 (.d(nor1_mid),.g(Anot),.s(\0 ),.b(\0 ));
+P1 #(.w(1.8u),.l(3.6u)) M8 (.d(Lnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M9 (.d(Lnot),.g(Bnot),.s(nor2_mid),.b(\0 ));
+N1 #(.w(1.8u),.l(0.2u)) M10 (.d(nor2_mid),.g(A),.s(\0 ),.b(\0 ));
+P1 #(.w(3.6u),.l(0.2u)) M1 (.d(Anot),.g(A),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M2 (.d(Anot),.g(A),.s(\0 ),.b(\0 ));
+P1 #(.w(3.6u),.l(0.2u)) M3 (.d(Bnot),.g(B),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M4 (.d(Bnot),.g(B),.s(\0 ),.b(\0 ));
+vsource #(.dc(1.8)) vcc (.p(dd),.n(\0 ));
+vpulse #(.val0(0.0),.val1(1.8),.td(10n),.rise(0.1n),.fall(0.1n),.width(15n),.period(30n)) va (.p(A),.n(\0 ));
+vsource #(.dc(0.0)) vb (.p(B),.n(\0 ));
+#Time       v(A)       v(B)       v(out_l)   v(out_q)   iter(0)   
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+open circuit: internal node 446
+did not converge
+ 0.         0.         0.         8.0951E-9  1.8        5.108E+3  
+zero time step
+newtime=1.000000e-12  rejectedtime=1.000000e-12  oldtime=0.000000e+00
+ 2.E-12     13.E-15   -8.E-15     6.717E-9   1.8        238.      
+ 5.E-12    -12.E-15    10.E-15    7.2992E-9  1.8        195.      
+ 10.E-12    13.E-15   -9.E-15     6.8684E-9  1.8        113.      
+ 18.E-12   -12.E-15    10.E-15    8.9177E-9  1.8        114.      
+zero time step
+newtime=1.900000e-11  rejectedtime=1.900000e-11  oldtime=1.800000e-11
+ 20.E-12   -12.E-15    9.E-15     8.5823E-9  1.8        236.      
+ 21.E-12    12.E-15   -9.E-15     8.0584E-9  1.8        193.      
+ 22.E-12   -12.E-15    9.E-15     7.4462E-9  1.8        194.      
+ 96.E-12    12.E-15   -9.E-15     7.3996E-9  1.8        71.       
+ 98.E-12   -12.E-15    9.E-15     6.7535E-9  1.8        218.      
+ 101.E-12   12.E-15   -10.E-15    6.2559E-9  1.8        218.      
+ 104.E-12  -12.E-15    9.E-15     6.2303E-9  1.8        194.      
+ 109.E-12   12.E-15   -9.E-15     5.9531E-9  1.8        153.      
+ 384.E-12  -12.E-15    9.E-15     5.9118E-9  1.8        33.       
+zero time step
+newtime=3.850000e-10  rejectedtime=3.850000e-10  oldtime=3.840000e-10

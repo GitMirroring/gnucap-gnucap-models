@@ -1,0 +1,172 @@
+// ******** psp104 nmos paramset ********
+// lukas deutz 2025
+paramset N1 PSP104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=1; .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+// ******** psp104 pmos paramset ********
+// lukas deutz 2025
+paramset P1 PSP104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=(- 1); .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+//* One-Bit Comparator (tran)
+// Enable verilog mode
+// BUG: needs noincmode
+ground \0 ;
+capacitor #(.c(30f)) CQ (.p(Qnot),.n(\0 ));
+capacitor #(.c(10f)) CL (.p(Lnot),.n(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) MQLO (.d(out_q),.g(Qnot),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) MQL1 (.d(out_q),.g(Qnot),.s(\0 ),.b(\0 ));
+P1 #(.l(0.2u),.w(3.6u)) MLTO (.d(out_l),.g(Lnot),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) MLT1 (.d(out_l),.g(Lnot),.s(\0 ),.b(\0 ));
+P1 #(.l(3.6u),.w(3.6u)) M11 (.d(Qnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.l(0.2u),.w(1.8u)) M12 (.d(Qnot),.g(AorBnot),.s(nor3_mid),.b(\0 ));
+N1 #(.l(0.2u),.w(1.8u)) M13 (.d(nor3_mid),.g(Lnot),.s(\0 ),.b(\0 ));
+P1 #(.w(1.8u),.l(3.6u)) M5 (.d(AorBnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M6 (.d(AorBnot),.g(B),.s(nor1_mid),.b(\0 ));
+N1 #(.w(1.8u),.l(0.2u)) M7 (.d(nor1_mid),.g(Anot),.s(\0 ),.b(\0 ));
+P1 #(.w(1.8u),.l(3.6u)) M8 (.d(Lnot),.g(\0 ),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M9 (.d(Lnot),.g(Bnot),.s(nor2_mid),.b(\0 ));
+N1 #(.w(1.8u),.l(0.2u)) M10 (.d(nor2_mid),.g(A),.s(\0 ),.b(\0 ));
+P1 #(.w(3.6u),.l(0.2u)) M1 (.d(Anot),.g(A),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M2 (.d(Anot),.g(A),.s(\0 ),.b(\0 ));
+P1 #(.w(3.6u),.l(0.2u)) M3 (.d(Bnot),.g(B),.s(dd),.b(dd));
+N1 #(.w(1.8u),.l(0.2u)) M4 (.d(Bnot),.g(B),.s(\0 ),.b(\0 ));
+vsource #(.dc(1.8)) vcc (.p(dd),.n(\0 ));
+vpulse #(.val0(0.0),.val1(1.8),.td(10n),.rise(0.1n),.fall(0.1n),.width(15n),.period(30n)) va (.p(A),.n(\0 ));
+vsource #(.dc(0.0)) vb (.p(B),.n(\0 ));
+#Time       v(A)       v(B)       v(out_l)   v(out_q)   iter(0)   
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+open circuit: internal node 140
+did not converge
+ 0.         0.         0.         8.0951E-9  1.8        5.108E+3  
+zero time step
+newtime=1.000000e-12  rejectedtime=1.000000e-12  oldtime=0.000000e+00
+ 2.E-12     13.E-15   -8.E-15     6.717E-9   1.8        238.      
+ 5.E-12    -12.E-15    10.E-15    7.2992E-9  1.8        258.      
+ 10.E-12    13.E-15   -9.E-15     6.8684E-9  1.8        176.      
+ 18.E-12   -12.E-15    10.E-15    8.9177E-9  1.8        177.      
+zero time step
+newtime=1.900000e-11  rejectedtime=1.900000e-11  oldtime=1.800000e-11
+ 20.E-12   -12.E-15    9.E-15     8.5823E-9  1.8        299.      
+ 25.E-12    12.E-15   -9.E-15     6.893E-9   1.8        196.      
+zero time step
+newtime=2.600000e-11  rejectedtime=2.600000e-11  oldtime=2.500000e-11
+ 27.E-12    12.E-15   -9.E-15     6.9659E-9  1.8        257.      
+ 28.E-12   -12.E-15    9.E-15     6.8732E-9  1.8        259.      
+ 31.E-12    12.E-15   -9.E-15     7.0832E-9  1.8        215.      
+ 33.E-12   -11.E-15    9.E-15     6.7572E-9  1.8        235.      
+ 36.E-12    12.E-15   -9.E-15     7.4524E-9  1.8        236.      
+ 41.E-12   -12.E-15    9.E-15     6.9253E-9  1.8        216.      
+ 61.E-12    12.E-15   -9.E-15    -868.E-12   1.8        177.      
+ 66.E-12   -12.E-15    9.E-15     2.8111E-9  1.8        242.      
+ 71.E-12    12.E-15   -9.E-15     6.8742E-9  1.8        238.      
+ 76.E-12   -12.E-15    9.E-15     6.3165E-9  1.8        215.      
+ 79.E-12    12.E-15   -9.E-15     6.4264E-9  1.8        237.      
+ 84.E-12   -11.E-15    9.E-15     7.1267E-9  1.8        238.      
+ 89.E-12    12.E-15   -9.E-15     6.6304E-9  1.8        238.      
+ 94.E-12   -12.E-15    9.E-15     7.7409E-9  1.8        237.      
+ 96.E-12    12.E-15   -9.E-15     8.4665E-9  1.8        277.      
+ 101.E-12  -12.E-15    9.E-15     8.4631E-9  1.8        215.      
+ 103.E-12   12.E-15   -9.E-15     8.561E-9   1.8        258.      
+ 105.E-12  -12.E-15    9.E-15     9.9186E-9  1.8        235.      
+ 107.E-12   12.E-15   -9.E-15     10.399E-9  1.8        256.      
+ 109.E-12  -12.E-15    9.E-15     10.938E-9  1.8        256.      
+ 116.E-12   12.E-15   -9.E-15     8.3946E-9  1.8        195.      
+ 121.E-12  -12.E-15    9.E-15     6.6309E-9  1.8        215.      
+ 126.E-12   12.E-15   -9.E-15     6.3802E-9  1.8        237.      
+ 129.E-12  -12.E-15    9.E-15     7.2891E-9  1.8        236.      
+ 134.E-12   12.E-15   -9.E-15     7.4223E-9  1.8        236.      
+ 139.E-12  -12.E-15    9.E-15     7.7565E-9  1.8        238.      
+ 144.E-12   12.E-15   -9.E-15     7.1849E-9  1.8        236.      
+ 147.E-12  -12.E-15    9.E-15     7.2623E-9  1.8        260.      
+ 152.E-12   12.E-15   -9.E-15     7.7041E-9  1.8        238.      
+ 157.E-12  -12.E-15    9.E-15     8.5812E-9  1.8        238.      
+ 162.E-12   12.E-15   -9.E-15     8.6049E-9  1.8        237.      
+ 165.E-12  -12.E-15    9.E-15     8.3013E-9  1.8        257.      
+ 170.E-12   12.E-15   -9.E-15     8.2235E-9  1.8        215.      
+ 175.E-12  -12.E-15    9.E-15     7.5662E-9  1.8        238.      
+ 176.E-12   11.E-15   -9.E-15     8.6144E-9  1.8        256.      
+ 181.E-12  -11.E-15    9.E-15     8.8717E-9  1.8        217.      
+ 185.E-12   12.E-15   -9.E-15     7.1521E-9  1.8        216.      
+ 205.E-12  -12.E-15    9.E-15     729.9E-12  1.8        173.      
+ 208.E-12   12.E-15   -9.E-15     2.7882E-9  1.8        257.      
+ 247.E-12  -12.E-15    9.E-15     7.8022E-9  1.8        174.      
+ 250.E-12   12.E-15   -9.E-15     6.1566E-9  1.8        257.      
+ 251.E-12  -12.E-15    9.E-15     7.2732E-9  1.8        299.      
+ 261.E-12   12.E-15   -9.E-15     7.047E-9   1.8        201.      
+ 262.E-12  -12.E-15    9.E-15     7.0793E-9  1.8        278.      
+ 272.E-12   12.E-15   -9.E-15     5.6691E-9  1.8        197.      
+ 277.E-12  -11.E-15    9.E-15     5.6907E-9  1.8        217.      
+ 282.E-12   12.E-15   -9.E-15     7.4096E-9  1.8        239.      
+ 287.E-12  -11.E-15    9.E-15     7.1151E-9  1.8        216.      
+ 288.E-12   11.E-15   -10.E-15    7.5512E-9  1.8        278.      
+ 298.E-12  -11.E-15    9.E-15     7.277E-9   1.8        197.      
+ 299.E-12   12.E-15   -9.E-15     7.5765E-9  1.8        278.      
+ 304.E-12  -11.E-15    10.E-15    9.2211E-9  1.8        218.      
+ 307.E-12   12.E-15   -10.E-15    8.4387E-9  1.8        237.      
+ 314.E-12  -11.E-15    10.E-15    5.9504E-9  1.8        196.      
+ 317.E-12   12.E-15   -10.E-15    6.384E-9   1.8        236.      
+ 322.E-12  -11.E-15    10.E-15    7.558E-9   1.8        215.      
+ 325.E-12   12.E-15   -10.E-15    7.9858E-9  1.8        256.      
+ 330.E-12  -11.E-15    10.E-15    8.0816E-9  1.8        235.      
+ 333.E-12   12.E-15   -10.E-15    8.1139E-9  1.8        256.      
+ 338.E-12  -11.E-15    10.E-15    8.1386E-9  1.8        215.      
+ 341.E-12   12.E-15   -10.E-15    8.11E-9    1.8        236.      
+ 344.E-12  -12.E-15    9.E-15     7.506E-9   1.8        256.      
+ 347.E-12   12.E-15   -9.E-15     7.3558E-9  1.8        237.      
+ 348.E-12  -12.E-15    9.E-15     7.3932E-9  1.8        278.      
+zero time step
+newtime=3.490000e-10  rejectedtime=3.490000e-10  oldtime=3.480000e-10

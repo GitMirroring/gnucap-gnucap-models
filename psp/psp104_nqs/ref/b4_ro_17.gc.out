@@ -1,0 +1,112 @@
+// ******** psp104 nqs nmos paramset ********
+// lukas deutz 2025
+paramset N1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=1; .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+// ******** psp104 nqs pmos paramset ********
+// lukas deutz 2025
+paramset P1 PSPNQS104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=(- 1); .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+//* 17-stage CMOS ring oscillator (tran) ported from BSIM481/benchmark/ro_17.b4
+//* Enable verilog mode
+ground \0 ;
+// cmos inverter
+module not1 (.z(z),.a(a),.vss(vss),.vdd(vdd));
+  P1 #(.l(0.18u),.w(10u),.ad(5p),.pd(22u),.as(5p),.ps(22u),.sa(2u),.sb(8u),.nf(3),.sd(0.2u)) m01 (.d(z),.g(a),.s(vdd),.b(vdd));
+  N1 #(.l(0.18u),.w(5u),.ad(5p),.pd(22u),.as(5p),.ps(22u),.sa(2u),.sb(8u),.nf(3),.sd(0.2u)) m02 (.d(z),.g(a),.s(vss),.b(vss));
+endmodule // not1
+
+// 17-stage ring oscillator
+resistor #(.r(1G)) rkick (.p(n02),.n(\0 ));
+not1 #() X01 (.z(n03),.a(n02),.vss(\0 ),.vdd(n01));
+not1 #() X02 (.z(n04),.a(n03),.vss(\0 ),.vdd(n01));
+not1 #() X03 (.z(n05),.a(n04),.vss(\0 ),.vdd(n01));
+not1 #() X04 (.z(n06),.a(n05),.vss(\0 ),.vdd(n01));
+not1 #() X05 (.z(n07),.a(n06),.vss(\0 ),.vdd(n01));
+not1 #() X06 (.z(n08),.a(n07),.vss(\0 ),.vdd(n01));
+not1 #() X07 (.z(n09),.a(n08),.vss(\0 ),.vdd(n01));
+not1 #() X08 (.z(n10),.a(n09),.vss(\0 ),.vdd(n01));
+not1 #() X09 (.z(n11),.a(n10),.vss(\0 ),.vdd(n01));
+not1 #() X10 (.z(n12),.a(n11),.vss(\0 ),.vdd(n01));
+not1 #() X11 (.z(n13),.a(n12),.vss(\0 ),.vdd(n01));
+not1 #() X12 (.z(n14),.a(n13),.vss(\0 ),.vdd(n01));
+not1 #() X13 (.z(n15),.a(n14),.vss(\0 ),.vdd(n01));
+not1 #() X14 (.z(n16),.a(n15),.vss(\0 ),.vdd(n01));
+not1 #() X15 (.z(n17),.a(n16),.vss(\0 ),.vdd(n01));
+not1 #() X16 (.z(n18),.a(n17),.vss(\0 ),.vdd(n01));
+not1 #() X17 (.z(n02),.a(n18),.vss(\0 ),.vdd(n01));
+capacitor #(.c(0.1p)) c1 (.p(n18),.n(\0 ));
+vsource #(.dc(2.0)) Vdd (.p(n01),.n(\0 ));
+#Time       v(n02)     v(n05)     iter(0)   
+ 0.         0.         0.         0.        
+ 100.E-12   1.1161     1.1161     7.        
+ 430.E-12   1.1038     1.1038     27.       
+ 760.E-12   1.1156     1.1156     5.        
+ 1.09E-9    1.1043     1.1043     6.        
+ 1.338E-9   1.115      1.115      48.       
+ 1.82E-9    1.1048     1.1048     40.       
+ 2.076E-9   1.1146     1.1146     48.       
+ 2.324E-9   1.1053     1.1053     48.       
+ 2.751E-9   1.1142     1.1142     34.       
+ 3.154E-9   1.1056     1.1056     29.       
+ 3.643E-9   1.1139     1.1138     31.       
+ 3.908E-9   1.1059     1.1061     50.       
+ 4.017E-9   1.8674     0.30832    75.       
+ 4.204E-9   1.0071    -0.17846    32.       
+ 4.251E-9   0.23512    0.025378   49.       
+ 4.362E-9  -0.11638    1.7656     32.       
+ 4.544E-9   1.4947     1.4625     20.       
+ 4.726E-9   2.0403    -0.23416    11.       
+ 5.019E-9   0.14549    1.9992     21.       
+ 5.312E-9   1.5707     1.9968     20.       
+ 5.459E-9   2.048      0.54795    36.       
+ 5.649E-9   0.28176    0.067815   38.       
+ 5.839E-9  -0.15078    2.0156     18.       
+ 6.029E-9   1.8896     0.33284    17.       
+ 6.195E-9   2.0884    -0.19308    38.       
+ 6.361E-9   0.2151     1.8689     15.       
+ 6.513E-9   0.53158    2.0642     36.       
+ 6.665E-9   1.979      0.32147    17.       
+ 6.904E-9   0.3671     1.4585     21.       
+ 7.143E-9  -0.21695    2.1081     18.       
+ 7.382E-9   1.9747     0.044404   19.       
+ 7.569E-9   0.52627    1.7731     41.       
+ 7.756E-9  -0.26251    2.1036     17.       
+ 7.85E-9    1.7362     0.64853    36.       
+ 8.119E-9   1.4751    -0.23875    16.       
+ 8.29E-9   -0.12698    1.9127     18.       
+ 8.376E-9   0.075843   2.0506     32.       
+ 8.608E-9   1.0672     1.9528     10.       
+ 8.724E-9   1.9661     0.95051    30.       
+ 9.043E-9   0.30397   -0.33736    21.       
+ 9.362E-9  -0.1952     2.0291     17.       
+ 9.681E-9   1.9843     0.14625    18.       
+ 10.E-9     0.28555    1.8332     21.       
+Gnucap   System status
+iterations: op=0, dc=0, tran=1183, fourier=0, total=1227
+transient timesteps: accepted=44, rejected=28, total=72
+nodes: user=18, subckt=0, model=884, total=902
+dctran density=4.2%, ac density=4.2%

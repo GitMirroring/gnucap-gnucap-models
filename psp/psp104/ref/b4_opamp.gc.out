@@ -1,0 +1,318 @@
+// ******** psp104 nmos paramset ********
+// lukas deutz 2025
+paramset N1 PSP104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=1; .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+// ******** psp104 pmos paramset ********
+// lukas deutz 2025
+paramset P1 PSP104VA;
+   parameter real l=1.0u;
+   parameter real w=1.0u;
+   parameter integer nf=1;
+   parameter real ad=1.0e-12;
+   parameter real pd=1.0e-6;
+   parameter real as=1.0e-12;
+   parameter real ps=1.0e-6;
+   parameter real sa=0.0;
+   parameter real sb=0.0;
+   parameter real sd=0.0;
+ .TYPE=(- 1); .L=l; .W=w; .NF=nf; .AD=ad; .PD=pd; .AS=as; .PS=ps; .SA=sa; .SB=sb; .SD=sd;
+endparamset
+
+//* Operational amplifier (ac) ported from BSIM481/benchmark_test/opamp.b4
+//* Enable verilog mode
+ground \0 ;
+// vsource #(.dc(0.0)) Vic(c, \0 );
+ground c;
+N1 #(.w(2u),.l(0.09u)) M6 (.d(vout),.g(bias),.s(vss),.b(vss));
+N1 #(.w(2u),.l(0.09u)) M7 (.d(vout),.g(bias2),.s(vdd),.b(out));
+P1 #(.w(2u),.l(0.09u)) M3 (.d(vdd),.g(bias1),.s(bias1),.b(vdd));
+P1 #(.w(2u),.l(0.09u)) M4 (.d(bias2),.g(bias1),.s(vdd),.b(vdd));
+N1 #(.w(2u),.l(0.09u)) M5 (.d(cm),.g(bias),.s(vss),.b(vss));
+N1 #(.w(2u),.l(0.09u)) Mbias (.d(bias),.g(bias),.s(vss),.b(vss));
+N1 #(.w(10u),.l(0.09u)) M1 (.d(bias1),.g(in1),.s(cm),.b(cm));
+N1 #(.w(10u),.l(0.09u)) M2 (.d(bias2),.g(in2),.s(cm),.b(cm));
+resistor #(.r(195k)) Rbias (.p(\0 ),.n(bias));
+capacitor #(.c(2p)) Cfb (.p(bias2),.n(vout));
+vcvs #(.gain(-1.0),.offset(0.0)) Eid (.p(in2),.n(c),.cp(in1),.cn(c));
+vsine #(.dc(0.0),.mag(0.1)) Vid (.p(in1),.n(c));
+vsource #(.dc(-1.8)) Vss (.p(vss),.n(\0 ));
+vsource #(.dc(+1.8)) Vdd (.p(vdd),.n(\0 ));
+#             v(in1)       v(in2)       v(vout)     
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 57
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+open circuit: internal node 70
+did not converge
+ 0.           0.           0.          -125.8186    
+#Freq         vdb(vout)    iter(0)     
+ 100.         7.22017      0.          
+ 125.8925     9.218945     0.          
+ 158.4893     11.21701     0.          
+ 199.5262     13.20973     0.          
+ 251.1886     15.20488     0.          
+ 316.2278     17.19301     0.          
+ 398.1072     19.17252     0.          
+ 501.1872     21.1451      0.          
+ 630.9573     23.09856     0.          
+ 794.3282     25.02714     0.          
+ 1.E+3        26.91827     0.          
+ 1.258925E+3  28.7481      0.          
+ 1.584893E+3  30.49002     0.          
+ 1.995262E+3  32.11244     0.          
+ 2.511886E+3  33.57361     0.          
+ 3.162278E+3  34.83658     0.          
+ 3.981072E+3  35.87639     0.          
+ 5.011872E+3  36.68832     0.          
+ 6.309573E+3  37.2938      0.          
+ 7.943282E+3  37.72289     0.          
+ 10.E+3       38.01742     0.          
+ 12.58925E+3  38.21345     0.          
+ 15.84893E+3  38.34252     0.          
+ 19.95262E+3  38.42518     0.          
+ 25.11886E+3  38.47822     0.          
+ 31.62278E+3  38.51187     0.          
+ 39.81072E+3  38.53146     0.          
+ 50.11872E+3  38.54337     0.          
+ 63.09573E+3  38.54811     0.          
+ 79.43282E+3  38.54812     0.          
+ 100.E+3      38.54199     0.          
+ 125.8925E+3  38.52931     0.          
+ 158.4893E+3  38.50809     0.          
+ 199.5262E+3  38.47249     0.          
+ 251.1886E+3  38.41687     0.          
+ 316.2278E+3  38.32897     0.          
+ 398.1072E+3  38.19276     0.          
+ 501.1872E+3  37.98458     0.          
+ 630.9573E+3  37.67423     0.          
+ 794.3282E+3  37.22439     0.          
+ 1.E+6        36.59311     0.          
+ 1.258925E+6  35.75076     0.          
+ 1.584893E+6  34.68016     0.          
+ 1.995262E+6  33.38878     0.          
+ 2.511886E+6  31.90429     0.          
+ 3.162278E+6  30.26385     0.          
+ 3.981072E+6  28.50703     0.          
+ 5.011872E+6  26.66785     0.          
+ 6.309573E+6  24.77235     0.          
+ 7.943282E+6  22.83953     0.          
+ 10.E+6       20.88231     0.          
+ 12.58925E+6  18.90933     0.          
+ 15.84893E+6  16.92612     0.          
+ 19.95262E+6  14.93623     0.          
+ 25.11886E+6  12.94176     0.          
+ 31.62278E+6  10.94391     0.          
+ 39.81072E+6  8.943162     0.          
+ 50.11872E+6  6.939353     0.          
+ 63.09573E+6  4.931719     0.          
+ 79.43282E+6  2.91874      0.          
+ 100.E+6      0.8979368    0.          
+Gnucap   System status
+iterations: op=0, dc=375, tran=0, fourier=0, total=436
+transient timesteps: accepted=0, rejected=0, total=0
+nodes: user=10, subckt=0, model=65, total=75
+dctran density=24.8%, ac density=24.8%
